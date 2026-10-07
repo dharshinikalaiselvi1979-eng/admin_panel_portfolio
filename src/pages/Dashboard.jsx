@@ -153,7 +153,15 @@ export default function Dashboard() {
             })}
           </nav>
         </div>
-        <div className="pt-6 border-t border-gray-800 mt-6">
+        <div className="pt-4 border-t border-gray-800 mt-4">
+          <div className="mb-3 px-1 text-xs text-gray-400">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span>
+              <span className="truncate text-[11px]" title={API_URL}>
+                {API_URL.replace(/^https?:\/\//, '')}
+              </span>
+            </div>
+          </div>
           <button
             onClick={handleLogout}
             className="w-full bg-red-600 p-2.5 rounded font-bold hover:bg-red-700 transition text-sm"
