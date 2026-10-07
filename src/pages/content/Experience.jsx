@@ -105,24 +105,27 @@ export default function Experience() {
       </form>
 
       <div className="space-y-3">
-        {experiences.map((exp) => (
-          <div key={exp.id} className="p-4 border-l-4 border-blue-600 bg-gray-50 rounded">
-            <div className="flex justify-between items-start">
-              <div>
-                <h3 className="font-bold text-lg">{exp.position}</h3>
-                <p className="text-gray-600">{exp.company}</p>
-                <p className="text-sm text-gray-500">{exp.start_date} - {exp.end_date}</p>
-                <p className="text-gray-600 mt-2">{exp.description}</p>
+        {experiences.map((exp) => {
+          const expId = exp._id || exp.id;
+          return (
+            <div key={expId} className="p-4 border-l-4 border-blue-600 bg-gray-50 rounded">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="font-bold text-lg">{exp.position}</h3>
+                  <p className="text-gray-600">{exp.company}</p>
+                  <p className="text-sm text-gray-500">{exp.start_date} - {exp.end_date}</p>
+                  <p className="text-gray-600 mt-2">{exp.description}</p>
+                </div>
+                <button
+                  onClick={() => handleDelete(expId)}
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                >
+                  Delete
+                </button>
               </div>
-              <button
-                onClick={() => handleDelete(exp.id)}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              >
-                Delete
-              </button>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

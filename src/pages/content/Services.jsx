@@ -85,21 +85,24 @@ export default function Services() {
       </form>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {services.map((service) => (
-          <div key={service.id} className="p-4 border rounded bg-gray-50">
-            <div className="flex justify-between items-start mb-2">
-              <span className="text-4xl">{service.icon}</span>
-              <button
-                onClick={() => handleDelete(service.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm"
-              >
-                Delete
-              </button>
+        {services.map((service) => {
+          const serviceId = service._id || service.id;
+          return (
+            <div key={serviceId} className="p-4 border rounded bg-gray-50">
+              <div className="flex justify-between items-start mb-2">
+                <span className="text-4xl">{service.icon}</span>
+                <button
+                  onClick={() => handleDelete(serviceId)}
+                  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm"
+                >
+                  Delete
+                </button>
+              </div>
+              <h3 className="font-bold text-lg">{service.title}</h3>
+              <p className="text-gray-600 text-sm">{service.description}</p>
             </div>
-            <h3 className="font-bold text-lg">{service.title}</h3>
-            <p className="text-gray-600 text-sm">{service.description}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

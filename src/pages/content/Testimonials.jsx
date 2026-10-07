@@ -95,23 +95,26 @@ export default function Testimonials() {
       </form>
 
       <div className="space-y-3">
-        {testimonials.map((testimonial) => (
-          <div key={testimonial.id} className="p-4 border rounded bg-gray-50">
-            <div className="flex justify-between items-start">
-              <div className="flex-1">
-                <p className="italic text-gray-700 mb-3">"{testimonial.text}"</p>
-                <p className="font-bold">{testimonial.author}</p>
-                <p className="text-sm text-gray-600">{testimonial.position}</p>
+        {testimonials.map((testimonial) => {
+          const testimonialId = testimonial._id || testimonial.id;
+          return (
+            <div key={testimonialId} className="p-4 border rounded bg-gray-50">
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <p className="italic text-gray-700 mb-3">"{testimonial.text}"</p>
+                  <p className="font-bold">{testimonial.author}</p>
+                  <p className="text-sm text-gray-600">{testimonial.position}</p>
+                </div>
+                <button
+                  onClick={() => handleDelete(testimonialId)}
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                >
+                  Delete
+                </button>
               </div>
-              <button
-                onClick={() => handleDelete(testimonial.id)}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              >
-                Delete
-              </button>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
