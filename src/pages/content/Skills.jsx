@@ -35,10 +35,11 @@ export default function Skills() {
   const fetchSkills = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API_URL}/content/skills`, { timeout: 4000 });
+      const res = await axios.get(`${API_URL}/content/skills`, { timeout: 25000 });
       if (Array.isArray(res.data) && res.data.length > 0) {
         setSkills(res.data);
         saveLocalSkills(res.data);
+        setStatus(null); // Clear warning on success!
       } else {
         // Fall back to locally stored skills if server has none
         const local = getLocalSkills();
@@ -50,7 +51,7 @@ export default function Skills() {
       setSkills(local);
       setStatus({
         type: 'warning',
-        text: 'Backend is offline or unreachable. Showing locally stored skills.'
+        text: `Backend connection error (${err.message}) at ${API_URL}. Showing locally stored skills.`
       });
     } finally {
       setLoading(false);
@@ -78,7 +79,7 @@ export default function Skills() {
     try {
       const res = await axios.post(`${API_URL}/content/skills`, form, {
         headers: { Authorization: `Bearer ${token}` },
-        timeout: 4000
+        timeout: 25000
       });
       const savedSkill = res.data || newSkill;
       const updated = [savedSkill, ...skills];
@@ -91,9 +92,10 @@ export default function Skills() {
       const updated = [newSkill, ...skills];
       setSkills(updated);
       saveLocalSkills(updated);
+      const errMsg = err.response?.data?.error || err.message;
       setStatus({
         type: 'warning',
-        text: '⚠️ Skill saved locally! (Backend server is offline or not configured in Vercel environment variables).'
+        text: `⚠️ Saved locally (${errMsg}). Check connection to ${API_URL}.`
       });
       setForm({ name: '', level: 'Intermediate', category: 'Frontend' });
     }
@@ -106,7 +108,7 @@ export default function Skills() {
       if (!String(id).startsWith('local_')) {
         await axios.delete(`${API_URL}/content/skills/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
-          timeout: 4000
+          timeout: 25000
         });
       }
     } catch (err) {
