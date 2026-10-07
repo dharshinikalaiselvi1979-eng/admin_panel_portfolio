@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../utils/config';
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -7,7 +8,6 @@ export default function Blogs() {
   const [form, setForm] = useState({ title: '', description: '', content: '', image: '', tags: [] });
   const [tagInput, setTagInput] = useState('');
   const [search, setSearch] = useState('');
-  const API_URL = process.env.REACT_APP_CMS_API_URL || 'http://localhost:5000/api';
   const token = localStorage.getItem('cms_auth_token');
 
   useEffect(() => {

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../utils/config';
 
 export default function Testimonials() {
   const [testimonials, setTestimonials] = useState([]);
   const [form, setForm] = useState({ author: '', position: '', text: '', image: '' });
-  const API_URL = process.env.REACT_APP_CMS_API_URL || 'http://localhost:5000/api';
   const token = localStorage.getItem('cms_auth_token');
 
   useEffect(() => {

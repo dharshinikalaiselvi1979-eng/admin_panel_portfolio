@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../utils/config';
 
 const STORAGE_KEY = 'cms_local_skills';
 
@@ -8,7 +9,6 @@ export default function Skills() {
   const [form, setForm] = useState({ name: '', level: 'Intermediate', category: 'Frontend' });
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
-  const API_URL = process.env.REACT_APP_CMS_API_URL || 'http://localhost:5000/api';
   const token = localStorage.getItem('cms_auth_token');
 
   useEffect(() => {

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { mediaUrl } from '../../utils/media';
+import { API_URL } from '../../utils/config';
 
 export default function MediaLibrary() {
   const [mediaList, setMediaList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [copiedUrl, setCopiedUrl] = useState('');
-  const API_URL = process.env.REACT_APP_CMS_API_URL || 'http://localhost:5000/api';
   const token = localStorage.getItem('cms_auth_token');
 
   useEffect(() => {

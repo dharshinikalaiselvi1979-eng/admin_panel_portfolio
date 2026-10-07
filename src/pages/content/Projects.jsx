@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { mediaUrl } from '../../utils/media';
+import { API_URL } from '../../utils/config';
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
@@ -8,7 +9,6 @@ export default function Projects() {
   const [form, setForm] = useState({ title: '', description: '', image: '', link: '', technologies: [] });
   const [techInput, setTechInput] = useState('');
   const [search, setSearch] = useState('');
-  const API_URL = process.env.REACT_APP_CMS_API_URL || 'http://localhost:5000/api';
   const token = localStorage.getItem('cms_auth_token');
 
   useEffect(() => {

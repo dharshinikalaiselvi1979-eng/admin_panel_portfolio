@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../utils/config';
 import About from './content/About';
 import Skills from './content/Skills';
 import Projects from './content/Projects';
@@ -23,7 +24,6 @@ function DashboardHome() {
     media: 0,
   });
   const [loading, setLoading] = useState(true);
-  const API_URL = process.env.REACT_APP_CMS_API_URL || 'http://localhost:5000/api';
   const token = localStorage.getItem('cms_auth_token');
 
   useEffect(() => {
